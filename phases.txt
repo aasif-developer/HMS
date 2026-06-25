@@ -1,0 +1,56 @@
+Phase-wise Approach
+Phase 1 — Project Setup (1 day, everyone together)
+src/
+  components/
+    common/          ← shared components everyone uses
+      Sidebar.jsx
+      Header.jsx
+      StatsCard.jsx
+      DataTable.jsx
+      StatusBadge.jsx
+  pages/
+    auth/
+      Login.jsx
+    receptionist/
+    nurse/
+    doctor/
+    lab/
+    pharmacy/
+  context/
+    AuthContext.jsx  ← role-based auth lives here
+  routes/
+    ProtectedRoute.jsx
+  services/
+    api.js           ← all axios calls
+
+    
+Phase 2 — Auth + Routing (1-2 days, 1 person)
+This is the most critical shared piece. One person builds:
+
+Login page
+JWT stored in localStorage
+AuthContext that holds { user, role, token }
+ProtectedRoute that redirects based on role
+
+jsx// Role-based redirect logic
+/login → checks role → sends to /receptionist or /doctor etc.
+Phase 3 — Shared Components (1-2 days, 1-2 people)
+Build these ONCE, everyone imports them:
+
+<StatsCard icon={} label="Today's Patients" value={47} />
+<DataTable columns={} rows={} />
+<StatusBadge status="Waiting" /> (handles colors automatically)
+<Sidebar links={} role="doctor" />
+
+Phase 4 — Module Development (parallel, each person owns one)
+Everyone builds their module independently after Phase 2+3 are done.
+
+Team Split
+PersonModulePagesYouDoctorDashboard, Patient Consultation, Diagnosis, Prescription, Lab Order, Radiology, Follow-upTeammate 2Receptionist + AuthLogin, Dashboard, Patient Mgmt, Appointments, Queue, BillingTeammate 3Nurse + Shared ComponentsDashboard, Patient Queue, Vitals Entry, Vitals HistoryTeammate 4Lab + PharmacyBoth dashboards + their sub-pages
+If it's a smaller team, just merge modules.
+
+Tech Stack Recommendation
+Since you're MERN:
+Frontend: React + React Router v6 + Tailwind CSS + Axios
+Backend: Node/Express/MongoDB (your existing setup)
+Auth: JWT (role field in the token payload — { id, name, role: "doctor" })
