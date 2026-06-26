@@ -5,7 +5,8 @@ import ProtectedRoute from './routes/ProtectedRoute'
 // Doctor pages
 import DoctorDashboard from './pages/doctor/DoctorDashboard'
 import PatientConsultation from './pages/doctor/PatientConsultation'
-
+import NurseDashboard from './pages/nurse/NurseDashboard'
+import VitalsEntry from './pages/nurse/VitalsEntry'
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,9 @@ function App() {
             <PatientConsultation />
           </ProtectedRoute>
         }/>
+
+      <Route path="/nurse" element={<ProtectedRoute allowedRole="nurse"><NurseDashboard /></ProtectedRoute>} />
+      <Route path="/nurse/vitals-entry" element={<ProtectedRoute allowedRole="nurse"><VitalsEntry /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
