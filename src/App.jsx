@@ -15,6 +15,7 @@ import ReceptionistDashboard from './pages/receptionist/ReceptionistDashboard'
 import PatientManagement from './pages/receptionist/PatientManagement'
 import PatientDetail from './pages/receptionist/PatientDetail'
 import PatientRegistration from './pages/receptionist/PatientRegistration'
+import AppointmentManagement from './pages/receptionist/AppointmentManagement'
 
 // Doctor pages
 import DoctorDashboard from './pages/doctor/DoctorDashboard'
@@ -74,6 +75,11 @@ function App() {
         <Route path="/receptionist/registration" element={
           <ProtectedRoute allowedRole="receptionist">
             <PatientRegistration />
+          </ProtectedRoute>
+        } />
+        <Route path="/receptionist/appointments" element={
+          <ProtectedRoute allowedRole="receptionist">
+            <AppointmentManagement />
           </ProtectedRoute>
         } />
 
@@ -184,7 +190,6 @@ function App() {
             <TestOrder />
           </ProtectedRoute>
         }/>
-<<<<<<< HEAD
         <Route path="/lab/sample-collection" element={
           <ProtectedRoute allowedRole="lab">
             <SampleCollection />
@@ -200,54 +205,6 @@ function App() {
             <ReportsManagement />
           </ProtectedRoute>
         }/>
-=======
-<Route path="/admin" element={
-  <ProtectedRoute allowedRole="admin">
-    <AdminDashboard />
-  </ProtectedRoute>
-} />
-<Route path="/admin/ip" element={
-  <ProtectedRoute allowedRole="admin">
-    <IPManagement />
-  </ProtectedRoute>
-} />
-<Route path="/admin/doctors" element={
-  <ProtectedRoute allowedRole="admin">
-    <Doctors />
-  </ProtectedRoute>
-} />
-<Route path="/admin/staff" element={
-  <ProtectedRoute allowedRole="admin">
-    <Staff />
-  </ProtectedRoute>
-} />
-<Route path="/admin/vehicles" element={
-  <ProtectedRoute allowedRole="admin">
-    <Vehicles />
-  </ProtectedRoute>
-} />
-<Route path="/admin/vehicles/add" element={
-  <ProtectedRoute allowedRole="admin">
-    <AddVehicle />
-  </ProtectedRoute>
-} />
-<Route path="/admin/finance" element={
-  <ProtectedRoute allowedRole="admin">
-    <Finance />
-  </ProtectedRoute>
-} />
-<Route path="/admin/followups" element={
-  <ProtectedRoute allowedRole="admin">
-    <FollowUps />
-  </ProtectedRoute>
-} />
-<Route path="/admin/reports" element={
-  <ProtectedRoute allowedRole="admin">
-    <Reports />
-  </ProtectedRoute>
-} />
-
->>>>>>> 3751ef7167aa4641eb4c21b8955c4075573944df
 
       </Routes>
     </BrowserRouter>
