@@ -32,6 +32,17 @@ import SampleCollection from './pages/lab/SampleCollection'
 import ResultEntry from './pages/lab/ResultEntry'
 import ReportsManagement from './pages/lab/ReportsManagement'
 
+//admin pages
+import AdminDashboard from './pages/admin/AdminDashboard'
+import IPManagement from './pages/admin/Ipmanagement'
+import Doctors from './pages/admin/Doctors'
+import Staff from './pages/admin/Staff'
+import Vehicles from './pages/admin/Vehicles'
+import AddVehicle from './pages/admin/AddVehicle'
+import Finance from './pages/admin/Finance'
+import FollowUps from './pages/admin/FollowUps'
+import Reports from './pages/admin/Reports'
+
 function App() {
   return (
     <BrowserRouter>
@@ -153,6 +164,51 @@ function App() {
             <TestOrder />
           </ProtectedRoute>
         }/>
+<Route path="/admin" element={
+  <ProtectedRoute allowedRole="admin">
+    <AdminDashboard />
+  </ProtectedRoute>
+} />
+<Route path="/admin/ip" element={
+  <ProtectedRoute allowedRole="admin">
+    <IPManagement />
+  </ProtectedRoute>
+} />
+<Route path="/admin/doctors" element={
+  <ProtectedRoute allowedRole="admin">
+    <Doctors />
+  </ProtectedRoute>
+} />
+<Route path="/admin/staff" element={
+  <ProtectedRoute allowedRole="admin">
+    <Staff />
+  </ProtectedRoute>
+} />
+<Route path="/admin/vehicles" element={
+  <ProtectedRoute allowedRole="admin">
+    <Vehicles />
+  </ProtectedRoute>
+} />
+<Route path="/admin/vehicles/add" element={
+  <ProtectedRoute allowedRole="admin">
+    <AddVehicle />
+  </ProtectedRoute>
+} />
+<Route path="/admin/finance" element={
+  <ProtectedRoute allowedRole="admin">
+    <Finance />
+  </ProtectedRoute>
+} />
+<Route path="/admin/followups" element={
+  <ProtectedRoute allowedRole="admin">
+    <FollowUps />
+  </ProtectedRoute>
+} />
+<Route path="/admin/reports" element={
+  <ProtectedRoute allowedRole="admin">
+    <Reports />
+  </ProtectedRoute>
+} />
 
 
       </Routes>
