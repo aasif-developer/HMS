@@ -7,3 +7,5 @@ ok then to claude you have to say that i have built this ui i guess i dont know 
 
 
 then later if i am comfortable i can change the functionality to work in backend and database ok
+
+3751ef7167aa4641eb4c21b8955c4075573944df

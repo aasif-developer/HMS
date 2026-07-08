@@ -61,13 +61,13 @@ const SEED_PATIENTS = [
 // Today's visits — this is the live queue. `status` drives the whole
 // cross-role workflow: Waiting → With Nurse → Ready for Doctor → With Doctor → Done
 const SEED_QUEUE = [
-  { token: "T-001", patientId: "P-1001", department: "Cardiology", checkIn: "08:45 AM", status: "Done",             priority: "Normal", complaint: "Routine checkup",           lastUpdated: "10:20 AM" },
-  { token: "T-007", patientId: "P-1002", department: "General",    checkIn: "09:20 AM", status: "With Doctor",      priority: "Normal", complaint: "Persistent cough, 3 days",  lastUpdated: "11:05 AM" },
-  { token: "T-008", patientId: "P-1003", department: "General",    checkIn: "09:30 AM", status: "With Nurse",       priority: "Critical", complaint: "Fever, weakness",         lastUpdated: "11:10 AM" },
-  { token: "T-009", patientId: "P-1004", department: "Cardiology", checkIn: "09:45 AM", status: "Ready for Doctor", priority: "Normal", complaint: "Chest pain, palpitations",  lastUpdated: "11:08 AM" },
-  { token: "T-010", patientId: "P-1005", department: "Ortho",      checkIn: "10:00 AM", status: "Waiting",          priority: "Urgent", complaint: "Hypertension follow-up",   lastUpdated: "10:00 AM" },
-  { token: "T-011", patientId: "P-1008", department: "General",    checkIn: "10:10 AM", status: "With Nurse",       priority: "Normal", complaint: "SpO2 below threshold",      lastUpdated: "11:00 AM" },
-  { token: "T-012", patientId: "P-1007", department: "Neuro",      checkIn: "10:20 AM", status: "Waiting",          priority: "Normal", complaint: "Knee pain, post-op review", lastUpdated: "10:20 AM" },
+  { token: "T-001", patientId: "P-1001", department: "Cardiology", checkIn: "08:45 AM", status: "Done", priority: "Normal", complaint: "Routine checkup", lastUpdated: "10:20 AM" },
+  { token: "T-007", patientId: "P-1002", department: "General", checkIn: "09:20 AM", status: "With Doctor", priority: "Normal", complaint: "Persistent cough, 3 days", lastUpdated: "11:05 AM" },
+  { token: "T-008", patientId: "P-1003", department: "General", checkIn: "09:30 AM", status: "With Nurse", priority: "Critical", complaint: "Fever, weakness", lastUpdated: "11:10 AM" },
+  { token: "T-009", patientId: "P-1004", department: "Cardiology", checkIn: "09:45 AM", status: "Ready for Doctor", priority: "Normal", complaint: "Chest pain, palpitations", lastUpdated: "11:08 AM" },
+  { token: "T-010", patientId: "P-1005", department: "Ortho", checkIn: "10:00 AM", status: "Waiting", priority: "Urgent", complaint: "Hypertension follow-up", lastUpdated: "10:00 AM" },
+  { token: "T-011", patientId: "P-1008", department: "General", checkIn: "10:10 AM", status: "With Nurse", priority: "Normal", complaint: "SpO2 below threshold", lastUpdated: "11:00 AM" },
+  { token: "T-012", patientId: "P-1007", department: "Neuro", checkIn: "10:20 AM", status: "Waiting", priority: "Normal", complaint: "Knee pain, post-op review", lastUpdated: "10:20 AM" },
 ]
 
 const STATUS_ORDER = ["Waiting", "With Nurse", "Ready for Doctor", "With Doctor", "Done"]
@@ -97,7 +97,7 @@ const SEED_VITALS = {
 // Diagnoses keyed by patientId (persists across visits)
 const SEED_DIAGNOSES = {
   "P-1004": [
-    { code: "I10",   name: "Essential Hypertension",         nature: "Confirmed" },
+    { code: "I10", name: "Essential Hypertension", nature: "Confirmed" },
     { code: "I49.9", name: "Cardiac Arrhythmia, unspecified", nature: "Provisional" },
   ],
   "P-1005": [
@@ -112,7 +112,7 @@ const SEED_PRESCRIPTIONS = [
     date: "19 Jun 2025, 11:30 AM", status: "Pending", urgency: "Critical",
     medicines: [
       { name: "Metoprolol Succinate 25mg", dose: "1 tablet", frequency: "Once daily", duration: "30 days", instructions: "After breakfast", batch: "MT-2025-04", price: 255 },
-      { name: "Atorvastatin 10mg",         dose: "1 tablet", frequency: "At bedtime",  duration: "30 days", instructions: "Monitor LFT",     batch: "AT-2025-05", price: 285 },
+      { name: "Atorvastatin 10mg", dose: "1 tablet", frequency: "At bedtime", duration: "30 days", instructions: "Monitor LFT", batch: "AT-2025-05", price: 285 },
     ],
   },
   {
@@ -130,18 +130,18 @@ const SEED_LAB_ORDERS = [
     orderId: "LO-5501", patientId: "P-1004", token: "T-009", doctor: "Dr. Priya Sharma",
     tests: [
       { name: "Complete Blood Count (CBC)", priority: "Routine" },
-      { name: "Lipid Profile",              priority: "Urgent"  },
-      { name: "Troponin I (hs)",            priority: "Routine" },
-      { name: "Thyroid Profile (T3/T4/TSH)",priority: "Routine" },
+      { name: "Lipid Profile", priority: "Urgent" },
+      { name: "Troponin I (hs)", priority: "Routine" },
+      { name: "Thyroid Profile (T3/T4/TSH)", priority: "Routine" },
     ],
     priority: "Urgent", ordered: "11:35 AM", status: "Pending", fasting: "Yes — 12 hours",
   },
   {
     orderId: "LO-5495", patientId: "P-1008", token: "T-011", doctor: "Dr. Ravi Kumar",
     tests: [
-      { name: "D-Dimer",  priority: "STAT" },
-      { name: "PT/INR",   priority: "STAT" },
-      { name: "APTT",     priority: "STAT" },
+      { name: "D-Dimer", priority: "STAT" },
+      { name: "PT/INR", priority: "STAT" },
+      { name: "APTT", priority: "STAT" },
     ],
     priority: "STAT", ordered: "09:00 AM", status: "Pending", fasting: "No",
   },
@@ -150,21 +150,30 @@ const SEED_LAB_ORDERS = [
 // Medicine inventory — shared between Doctor's prescription search,
 // Pharmacy's inventory view, and dispensing (which decrements stock)
 const SEED_MEDICINES = [
-  { name: "Metoprolol Succinate 25mg", generic: "Metoprolol",   category: "Tablet", stock: 12,  batch: "MT-2025-04", expiry: "Dec 2026", price: 85,  reorderLevel: 50  },
-  { name: "Amlodipine 5mg",            generic: "Amlodipine",   category: "Tablet", stock: 8,   batch: "AM-2025-03", expiry: "Oct 2025", price: 42,  reorderLevel: 100 },
-  { name: "Atorvastatin 10mg",         generic: "Atorvastatin", category: "Tablet", stock: 240, batch: "AT-2025-05", expiry: "Mar 2027", price: 95,  reorderLevel: 50  },
-  { name: "Azithromycin 500mg",        generic: "Azithromycin", category: "Tablet", stock: 180, batch: "AZ-2025-02", expiry: "Aug 2026", price: 110, reorderLevel: 30  },
-  { name: "Paracetamol 500mg",         generic: "Paracetamol",  category: "Tablet", stock: 45,  batch: "PC-2025-06", expiry: "Sep 2025", price: 18,  reorderLevel: 200 },
-  { name: "Ondansetron 4mg",           generic: "Ondansetron",  category: "Tablet", stock: 0,   batch: "—",          expiry: "—",         price: 72,  reorderLevel: 50  },
-  { name: "Aspirin 75mg",              generic: "Aspirin",      category: "Tablet", stock: 20,  batch: "AS-2025-01", expiry: "Jan 2027", price: 54,  reorderLevel: 100 },
+  { name: "Metoprolol Succinate 25mg", generic: "Metoprolol", category: "Tablet", stock: 12, batch: "MT-2025-04", expiry: "Dec 2026", price: 85, reorderLevel: 50 },
+  { name: "Amlodipine 5mg", generic: "Amlodipine", category: "Tablet", stock: 8, batch: "AM-2025-03", expiry: "Oct 2025", price: 42, reorderLevel: 100 },
+  { name: "Atorvastatin 10mg", generic: "Atorvastatin", category: "Tablet", stock: 240, batch: "AT-2025-05", expiry: "Mar 2027", price: 95, reorderLevel: 50 },
+  { name: "Azithromycin 500mg", generic: "Azithromycin", category: "Tablet", stock: 180, batch: "AZ-2025-02", expiry: "Aug 2026", price: 110, reorderLevel: 30 },
+  { name: "Paracetamol 500mg", generic: "Paracetamol", category: "Tablet", stock: 45, batch: "PC-2025-06", expiry: "Sep 2025", price: 18, reorderLevel: 200 },
+  { name: "Ondansetron 4mg", generic: "Ondansetron", category: "Tablet", stock: 0, batch: "—", expiry: "—", price: 72, reorderLevel: 50 },
+  { name: "Aspirin 75mg", generic: "Aspirin", category: "Tablet", stock: 20, batch: "AS-2025-01", expiry: "Jan 2027", price: 54, reorderLevel: 100 },
 ]
 
 // Bills — shared between Receptionist billing and Pharmacy billing
 const SEED_BILLS = [
-  { billId: "PB-4501", patientId: "P-1004", items: 3, gross: 665,  discount: 0,  net: 665,  mode: "Cash",      status: "Paid" },
-  { billId: "PB-4500", patientId: "P-1001", items: 2, gross: 380,  discount: 38, net: 342,  mode: "Card",      status: "Paid" },
-  { billId: "PB-4499", patientId: "P-1003", items: 4, gross: 1240, discount: 0,  net: 1240, mode: "Insurance", status: "Partial" },
+  { billId: "PB-4501", patientId: "P-1004", items: 3, gross: 665, discount: 0, net: 665, mode: "Cash", status: "Paid" },
+  { billId: "PB-4500", patientId: "P-1001", items: 2, gross: 380, discount: 38, net: 342, mode: "Card", status: "Paid" },
+  { billId: "PB-4499", patientId: "P-1003", items: 4, gross: 1240, discount: 0, net: 1240, mode: "Insurance", status: "Partial" },
 ]
+
+// Lab results — keyed by orderId, written once ResultEntry saves
+const SEED_LAB_RESULTS = {}
+
+// Radiology orders — the hop from Doctor → Radiology
+const SEED_RADIOLOGY_ORDERS = []
+
+// Follow-ups — scheduled by Doctor, tracked by Admin
+const SEED_FOLLOWUPS = []
 
 function computeStatus(status) {
   return { hasNext: STATUS_ORDER.indexOf(status) < STATUS_ORDER.length - 1 }
@@ -177,10 +186,12 @@ const initialState = {
   diagnoses: SEED_DIAGNOSES,
   prescriptions: SEED_PRESCRIPTIONS,
   labOrders: SEED_LAB_ORDERS,
+  labResults: SEED_LAB_RESULTS,           // NEW
+  radiologyOrders: SEED_RADIOLOGY_ORDERS, // NEW
+  followUps: SEED_FOLLOWUPS,              // NEW
   medicines: SEED_MEDICINES,
   bills: SEED_BILLS,
 }
-
 // ─────────────────────────────────────────────────────────────────────────
 // REDUCER
 // ─────────────────────────────────────────────────────────────────────────
@@ -245,7 +256,56 @@ function hospitalReducer(state, action) {
         ),
       }
     }
+    case 'SAVE_LAB_RESULT': {
+      const { orderId, result } = action.payload
+      return {
+        ...state,
+        labResults: { ...state.labResults, [orderId]: result },
+        // Saving a result completes the order
+        labOrders: state.labOrders.map(o =>
+          o.orderId === orderId ? { ...o, status: "Completed" } : o
+        ),
+      }
+    }
 
+    case 'UPDATE_REPORT_DELIVERY': {
+      const { orderId, delivery } = action.payload
+      return {
+        ...state,
+        labResults: {
+          ...state.labResults,
+          [orderId]: { ...state.labResults[orderId], delivery },
+        },
+      }
+    }
+
+    case 'CREATE_RADIOLOGY_ORDER': {
+      return { ...state, radiologyOrders: [action.payload, ...state.radiologyOrders] }
+    }
+
+    case 'UPDATE_RADIOLOGY_STATUS': {
+      const { id, status } = action.payload
+      return {
+        ...state,
+        radiologyOrders: state.radiologyOrders.map(r =>
+          r.id === id ? { ...r, status } : r
+        ),
+      }
+    }
+
+    case 'CREATE_FOLLOWUP': {
+      return { ...state, followUps: [action.payload, ...state.followUps] }
+    }
+
+    case 'UPDATE_FOLLOWUP_STATUS': {
+      const { id, status } = action.payload
+      return {
+        ...state,
+        followUps: state.followUps.map(f =>
+          f.id === id ? { ...f, status } : f
+        ),
+      }
+    }
     case 'CREATE_LAB_ORDER': {
       return { ...state, labOrders: [action.payload, ...state.labOrders] }
     }
@@ -268,6 +328,9 @@ function hospitalReducer(state, action) {
           m.name === name ? { ...m, stock: Math.max(0, m.stock - qty) } : m
         ),
       }
+    }
+    case 'ADD_MEDICINE': {
+      return { ...state, medicines: [action.payload, ...state.medicines] }
     }
 
     case 'ADD_BILL': {
@@ -375,9 +438,9 @@ export function useLabOrders() {
 export function useMedicines() {
   const { state, dispatch } = useHospital()
   const decrementStock = (name, qty) => dispatch({ type: 'DECREMENT_STOCK', payload: { name, qty } })
-  return { medicines: state.medicines, decrementStock }
+  const addMedicine = (medicine) => dispatch({ type: 'ADD_MEDICINE', payload: medicine })
+  return { medicines: state.medicines, decrementStock, addMedicine }
 }
-
 export function useBills() {
   const { state, dispatch } = useHospital()
   const addBill = (bill) => dispatch({ type: 'ADD_BILL', payload: bill })

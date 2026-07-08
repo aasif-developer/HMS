@@ -33,10 +33,20 @@ function DoctorDashboard() {
   const pendingCount = doctorQueue.length
   const criticalCount = queue.filter(v => v.priority === "Critical").length
 
+  // NOTE: Every other sidebar link (Diagnosis, Prescription, Lab Order, etc.)
+  // needs a :token in its route, and the Dashboard has no "current patient"
+  // selected — it's a list of many. Routing there blind would just land on
+  // "No patient found for token undefined". So those links stay inert here;
+  // the real path in is "Open Case" on a row below, which carries the token.
+  const handleNavClick = (link) => {
+    setActiveLink(link)
+    if (link === "Dashboard") navigate('/doctor')
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
 
-      <Sidebar links={NAV_LINKS} activeLink={activeLink} onLinkClick={setActiveLink} />
+      <Sidebar links={NAV_LINKS} activeLink={activeLink} onLinkClick={handleNavClick} />
 
       <main className="flex-1 p-6 overflow-auto">
 
